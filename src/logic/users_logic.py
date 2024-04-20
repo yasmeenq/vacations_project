@@ -1,6 +1,5 @@
 from utils.dal import *
 from model.users_model import *
-from model.vacations_model import * 
 
 class UsersLogic:
     def __init__(self):

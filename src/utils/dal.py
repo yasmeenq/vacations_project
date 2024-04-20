@@ -1,5 +1,5 @@
 import mysql.connector
-
+#start connection - get table - get one - insert - update - delete - close connection - #7
 class DAL:
     def __init__(self):
         self.connection = mysql.connector.connect(
@@ -32,6 +32,7 @@ class DAL:
             last_row_id = cursor.lastrowid
             return last_row_id
     
+    #👍
     def update(self, sql, params=None):
         with self.connection.cursor() as cursor:
             cursor.execute(sql, params)
@@ -39,6 +40,7 @@ class DAL:
             row_count = cursor.rowcount
             return row_count  
 
+    #👍
     def delete(self, sql, params=None):
         with self.connection.cursor() as cursor:
             cursor.execute(sql, params)
