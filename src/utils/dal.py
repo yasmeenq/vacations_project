@@ -1,5 +1,5 @@
 import mysql.connector
-#start connection - get table - get one - insert - update - delete - close connection - #7
+#create DAL Class: start connection - get table - get one - insert - update - delete - close connection - #7
 class DAL:
     def __init__(self):
         self.connection = mysql.connector.connect(

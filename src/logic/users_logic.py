@@ -1,25 +1,27 @@
 from utils.dal import *
 from model.users_model import *
 
+#import from dal+model - logic class: init dal() - functions
+
 class UsersLogic:
     def __init__(self):
         self.dal = DAL()
 
-    #👍
+    #👍 show users
     def get_all_users(self):
         sql = "SELECT * FROM vacation.users"
         result = self.dal.get_table(sql)
         result_to_obj = UsersModel.dictionaries_to_objects(result)
         return result_to_obj
    
-   #👍
+   #👍 show one user
     def get_one_user(self):
         sql = "SELECT * FROM vacation.users"
         result = self.dal.get_one_row(sql)
         result_to_obj = UsersModel.dictionary_to_object(result)
         return result_to_obj
 
-    #👍
+    #👍 add user
     def add_regular_user(self,firstname,lastname,email,password):
         sql = """
         INSERT INTO vacation.users
@@ -37,7 +39,7 @@ class UsersLogic:
         else:
             return "No rows inserted"
 
-    #👍
+    #👍 get user by email and password
     def get_user_by_email_password(self, email, password):
         sql = f"SELECT * FROM vacation.users WHERE email = %s AND password= %s"
         params = (email,password)
@@ -48,7 +50,7 @@ class UsersLogic:
             result_to_obj = UsersModel.dictionaries_to_objects(result)
             return result_to_obj 
 
-    #👍
+    #👍 check if an email exists
     def if_email_exist(self,email):
         sql = f"SELECT * FROM vacation.users WHERE email = %s"
         params = (email,)

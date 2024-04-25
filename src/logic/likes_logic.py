@@ -7,7 +7,7 @@ class LikesLogic:
     def __init__(self):
         self.dal = DAL()
  
-    #🤔 check for the restriction thingy
+    #👍 put foreign_key on CASCADE
     def add_like(self, userID, vacationID):
         sql = """
         INSERT INTO `vacation`.`likes` (`userID`,`vacationID`)
@@ -21,7 +21,7 @@ class LikesLogic:
         else:
             return f"No likes added."
 
-    #🤔 check for the restriction thingy
+    #👍 put foreign_key on CASCADE
     def delete_like(self, userID, vacationID):
         sql = """
         DELETE FROM `vacation`.`likes` 

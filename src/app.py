@@ -33,6 +33,7 @@ users_logic = UsersLogic()
 
 
 #get user by email and password 👍
+# print("get a user by email and password.")
 # user_email = input("email: ")
 # user_password = input("password: ")
 # name_output = users_logic.get_user_by_email_password(user_email, user_password)
@@ -42,13 +43,13 @@ users_logic = UsersLogic()
 #     for item in name_output:
 #         print(item)
 
-#Check if email exits 🤔
+# Check if email exits 👍
 # check_email = input("enter email to check: ")
 # checking_output = users_logic.if_email_exist(check_email.strip())
 # print(checking_output)
 
 # print("---------------------------------------------------------------------------")
-vacation_logic = VacationsLogic()
+# vacation_logic = VacationsLogic()
 
 #get all vacations 👍
 # all_vacations = vacation_logic.get_all_vacations()
@@ -95,21 +96,22 @@ vacation_logic = VacationsLogic()
 
 print("---------------------------------------------------------------------------")
 
-likes_logic = LikesLogic()
+# likes_logic = LikesLogic()
 
-#like a vacation 🤔
-print("Like a Vacation: ")
-user_id_likes = str(input("userID: "))
-vacation_id_likes = str(input("vacationID: "))
+# #like a vacation 🤔
+# print("Like a Vacation: ")
+# user_id_likes = str(input("userID: "))
+# vacation_id_likes = str(input("vacationID: "))
 
-add_like = likes_logic.add_like(user_id_likes, vacation_id_likes)
-print(add_like)
-print()
-#delete a like of a vacation 🤔
-print("Unlike a Vacation: ")
-user_id_delete_like = str(input("userID: "))
-vacation_id_delete_like = str(input("vacationID: "))
+# add_like = likes_logic.add_like(user_id_likes, vacation_id_likes)
+# print(add_like)
+# print()
 
-delete_like = likes_logic.delete_like(user_id_delete_like, vacation_id_delete_like)
-print(delete_like)
+# #delete a like of a vacation 🤔
+# print("Unlike a Vacation: ")
+# user_id_delete_like = str(input("userID: "))
+# vacation_id_delete_like = str(input("vacationID: "))
+
+# delete_like = likes_logic.delete_like(user_id_delete_like, vacation_id_delete_like)
+# print(delete_like)
 
