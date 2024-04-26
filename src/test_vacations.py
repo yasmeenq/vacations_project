@@ -18,15 +18,15 @@ print(new_vacation)
 new_vacation1 = vacation_facade.add_new_vacation(3, "", "2025-01-03", "2025-01-07", 2400, "")
 print(new_vacation1)  #Fields cannot be empty. Please try again.
 
-# #exception2 invalid countryID:
+#exception2 invalid countryID:
 new_vacation2 = vacation_facade.add_new_vacation("string countryID", "explore NYC", "2025-01-03", "2025-01-07", 2400, "nyc.png")
 print(new_vacation2)  #CountryID must be an integer.
 
-# #exception3 - invalid price
+#exception3 - invalid price
 new_vacation3 = vacation_facade.add_new_vacation(3, "explore NYC", "2025-01-03", "2025-01-07", -2400, "nyc.png")
 print(new_vacation3)  #Price must be between 0 and 10,000.
 
-# #exception4 - invalid dates
+#exception4 - invalid dates
 new_vacation4 = vacation_facade.add_new_vacation(3, "explore NYC", "2025-01-07", "2025-01-03", 2400, "nyc.png")
 print(new_vacation4)  #Start date cannot be greater than end date.
 new_vacation5 = vacation_facade.add_new_vacation(3, "explore NYC", "2009-01-03", "2009-01-07", 2400, "nyc.png")
@@ -65,7 +65,7 @@ print()
 print()
 
 #4) delete vacation 👍
-delete_vacation = vacation_facade.delete_vacation(23)
+delete_vacation = vacation_facade.delete_vacation(25)
 print(delete_vacation)
 
 #exception1 - invalid vacationID 

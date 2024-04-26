@@ -94,8 +94,7 @@ class VacationsFacade:
         return update_vacation
     
 
-    def delete_vacation(self, vacationID): 
-                
+    def delete_vacation(self, vacationID):      
         try:
             vacationID = int(vacationID)
         except ValueError:

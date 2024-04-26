@@ -16,7 +16,7 @@ class LikesLogic:
         params = (userID, vacationID)
         result = self.dal.insert(sql, params)
         
-        if result is not None:
+        if result != 0:
             return f"Last row ID: {result}\nuserID {userID} liked vacationID {vacationID}"
         else:
             return f"No likes added."
@@ -30,7 +30,7 @@ class LikesLogic:
         params = (userID, vacationID)
         result = self.dal.delete(sql, params)
 
-        if result is not None and result != 0:
+        if result != 0:
             return f"rows affected: {result} \nuserID {userID} unliked vacationID {vacationID}."  
         else:
             return f"no rows were deleted"  

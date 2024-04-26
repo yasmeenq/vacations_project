@@ -1,21 +1,19 @@
 from utils.dal import *
 from logic.likes_logic import *
 
-likes_logic = LikesLogic()
+class LikesFacade:
+    def __init__(self) -> None:
+        self.logic = LikesLogic()
 
-#like a vacation 👍
-print("Like a Vacation: ")
-user_id_likes = str(input("userID: "))
-vacation_id_likes = str(input("vacationID: "))
+    def like(self, userID, vacationID):
+        print("Like a Vacation ❤")
+        like_vacation = self.logic.add_like(userID, vacationID)
+        return like_vacation
 
-add_like = likes_logic.add_like(user_id_likes, vacation_id_likes)
-print(add_like)
-print()
+    def unlike(self, userID, vacationID):
+        print("Unlike a Vacation 👎")
+        unlike_vacation = self.logic.delete_like(userID, vacationID)
+        return unlike_vacation
 
-#delete a like of a vacation 👍
-print("Unlike a Vacation: ")
-user_id_delete_like = str(input("userID: "))
-vacation_id_delete_like = str(input("vacationID: "))
-
-delete_like = likes_logic.delete_like(user_id_delete_like, vacation_id_delete_like)
-print(delete_like)
+    def close(self):
+        self.logic.close()
