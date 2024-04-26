@@ -10,7 +10,7 @@ class VacationsLogic:
 
     #👍
     def get_all_vacations(self):
-        sql = "SELECT * FROM vacation.vacations LIMIT 5"
+        sql = "SELECT * FROM vacation.vacations ORDER BY startDate DESC"
         result = self.dal.get_table(sql)
         result_to_object = VacationsModel.dictionaries_to_objects(result)
         return result_to_object

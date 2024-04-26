@@ -49,13 +49,13 @@ users_logic = UsersLogic()
 # print(checking_output)
 
 # print("---------------------------------------------------------------------------")
-# vacation_logic = VacationsLogic()
+vacation_logic = VacationsLogic()
 
 #get all vacations 👍
-# all_vacations = vacation_logic.get_all_vacations()
-# for vacation in all_vacations:
-#     print(vacation)
-# print()
+all_vacations = vacation_logic.get_all_vacations()
+for vacation in all_vacations:
+    print(vacation)
+print()
 
 #add new vacation 👍
 # insert_country_id = str(input("insert countryID: "))
