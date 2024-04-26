@@ -11,8 +11,62 @@ class Test:
     def test_all(self):
         def users():
             print("【Ｕｓｅｒｓ　Ｔｅｓｔ：】")
+            # 1) add new user:
+            print("\nRegister New User:")
+            new_user = self.usersFacade.user_registration("Mia", "Patel", "mia1@mail.com",7771)
+            print(new_user)
 
+            print("\nExceptions:")
+            #exception1 - empty fields:
+            new_user1 = self.usersFacade.user_registration("", "Patel", "mia@mail.com",7771)
+            print(new_user1) #Fields cannot be empty. Please try again.
 
+            #exception2 - invalid email format:
+            new_user2 = self.usersFacade.user_registration("Mia", "Patel", "mia_email",7771)
+            print(new_user2) #Email is not valid. Please try again.
+
+            #exception3 - invalid password:
+            new_user3 = self.usersFacade.user_registration("Mia", "Patel", "mia1@mail.com",71)
+            print(new_user3) #Password must be minimum 4 characters. Please try again.
+
+            #exception4- email already exists:
+            new_user4 = self.usersFacade.user_registration("Mia", "Patel", "emily@mail.com", 7771)
+            print(new_user4) #Email already exists. Please choose another one.
+
+            #exception4 - invalid firstName or lastName
+            new_user5 = self.usersFacade.user_registration(123, 25.987, "mia1@mail.com", 7771)
+            print(new_user5) #First name and last name must be strings
+            new_user6 = self.usersFacade.user_registration("Mia34", "Patel2009", "mia1@mail.com",7771)
+            print(new_user6) #First name and last name must contain only letters.
+
+            print()
+            print()
+
+            #2) user login:
+            user_login = self.usersFacade.user_login("john@mail.com",1234)
+            print(user_login)
+
+            print("\nExceptions: ")
+            #exception1 - empty fields:
+            user_login1 = self.usersFacade.user_login("",1234)
+            print(user_login1) #Email and password cannot be empty.
+
+            #exception2 - invalid email format:
+            user_login = self.usersFacade.user_login("john_legend_mail",1234)
+            print(user_login)  #Email is not valid. Please try again.
+
+            #exception3 - invalid password:
+            user_login = self.usersFacade.user_login("john@mail.com",11)
+            print(user_login)  #Password must be minimum 4 characters. Please try again.
+
+            #exception4 - wrong email:
+            user_login = self.usersFacade.user_login("kjhgfdsdfgdfgvx@mail.com",1234)
+            print(user_login) # Incorrect Email or Password. Please try again.
+
+            #exception5 - wrong password:
+            user_login = self.usersFacade.user_login("john@mail.com",76543234)
+            print(user_login)  #Incorrect Email or Password. Please try again.
+            print()
 
 
         def vacations():
@@ -27,7 +81,7 @@ class Test:
 
             #2) add new vacation 👍
             print("Adding New Vacation:")
-            new_vacation = self.vacationsFacade.add_new_vacation ("explore NYC", "2025-01-03", "2025-01-07", 2400, "nyc.png")
+            new_vacation = self.vacationsFacade.add_new_vacation (3,"explore NYC", "2025-01-03", "2025-01-07", 2400, "nyc.png")
             print(new_vacation)
             
             print("\nExceptions:")            
@@ -99,10 +153,10 @@ class Test:
 
         def likes():
             print("【Ｌｉｋｅｓ　Ｔｅｓｔ：】 \n")
-            like_vacation = self.likesFacade.like(9,11)
+            like_vacation = self.likesFacade.like(15,11)
             print(like_vacation)
             print()
-            unlike_vacation = self.likesFacade.unlike(9,11)
+            unlike_vacation = self.likesFacade.unlike(15,11)
             print(unlike_vacation)
 
 

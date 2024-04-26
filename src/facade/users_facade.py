@@ -22,6 +22,14 @@ class UsersFacade:
         # Input validation - cannot have empty fields
         if not all([firstName, lastName, email, password]):
             return "Fields cannot be empty. Please try again."
+        
+        # Check if firstName and lastName are strings
+        if not (isinstance(firstName, str) and isinstance(lastName, str)):
+            return "First name and last name must be strings."
+
+        # Check if firstName and lastName contain only letters
+        if not (firstName.isalpha() and lastName.isalpha()):
+            return "First name and last name must contain only letters."
 
         # Validate email format
         if not self.validate_email(email):
@@ -37,12 +45,12 @@ class UsersFacade:
 
         # Register User:
         new_user = self.logic.add_regular_user(firstName, lastName, email, password)
-        return f"{new_user} \nregistered successfully! Welcome!😊"
+        return f"{new_user} \nRegistered successfully! Welcome {firstName}!😊"
     
     
     def user_login(self, email, password):
         # Input validation - cannot have empty fields
-        if not email.strip() or not str(password).strip():
+        if not all([email, password]):
             return "Email and password cannot be empty."
 
         # Validate email format:
@@ -54,14 +62,18 @@ class UsersFacade:
             return "Password must be minimum 4 characters. Please try again."
 
         # Check if the user exists
-        check_user = self.logic.get_user_by_email_password(email, password)
+        try:
+            check_user = self.logic.get_user_by_email_password(email, password)
 
-        if check_user == "User Doesn't Exist.":
-            return "Incorrect Email or Password. Please try again."
-        elif isinstance(check_user, list) and len(check_user) > 0:
-            return f"Logged in successfully.\n{check_user[0]}"
-        else:
-            return "User Doesn't Exist."
+            if check_user == "User Doesn't Exist.":
+                return "Incorrect Email or Password. Please try again."
+            elif isinstance(check_user, list) and len(check_user) > 0:
+                return f"Logged in successfully!\n{check_user[0]}"
+            else:
+                return "User Doesn't Exist. Please try again later."
+            
+        except Exception as e:
+            return f"An unexpected error occurred: {str(e)}. Please try again later."        
                 
     
     def close(self):
