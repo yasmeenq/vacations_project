@@ -9,7 +9,7 @@ class VacationsFacade:
 
 
     def get_vacations_sorted_by_date_desc(self):
-        print("\nAll vacations: ")   
+        print("\nAll vacations. filter: date is descending: ")   
         vacations = self.logic.get_all_vacations()
         return vacations
 

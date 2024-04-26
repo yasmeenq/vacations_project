@@ -2,4 +2,6 @@ from Test import *
 
 test = Test()
 
-Test.test_all()
+test.test_all()
+
+test.close()

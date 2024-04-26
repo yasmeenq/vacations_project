@@ -11,7 +11,7 @@ class LikesFacade:
         return like_vacation
 
     def unlike(self, userID, vacationID):
-        print("Unlike a Vacation 👎")
+        print("Unlike a Vacation ❌")
         unlike_vacation = self.logic.delete_like(userID, vacationID)
         return unlike_vacation
 
