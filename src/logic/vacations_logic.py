@@ -10,7 +10,7 @@ class VacationsLogic:
 
     #👍
     def get_all_vacations(self):
-        sql = "SELECT * FROM vacation.vacations ORDER BY startDate DESC"
+        sql = "SELECT * FROM vacation.vacations ORDER BY startDate DESC LIMIT 3"
         result = self.dal.get_table(sql)
         result_to_object = VacationsModel.dictionaries_to_objects(result)
         return result_to_object
@@ -43,8 +43,7 @@ class VacationsLogic:
         params = (countryID,description,startDate,endDate,price,vacationPictureFile, vacationID)
         result = self.dal.update(sql, params)
 
-        if result is not None:
-
+        if result != 0:
             # Construct SQL query to fetch the newly updated vacation
             sql_update_vacation = "SELECT * FROM vacation.vacations WHERE vacationID = %s"
             new_vacation = self.dal.get_table(sql_update_vacation, (vacationID,))
@@ -53,7 +52,7 @@ class VacationsLogic:
         else:
             return "No rows updated"
 
-    #delete an existing vacation 👍🤩
+    #delete an existing vacation 👍
     def delete_existing_vacation(self, vacationID):
         sql= """
             DELETE FROM `vacation`.`vacations`
@@ -62,10 +61,10 @@ class VacationsLogic:
         params = (vacationID,)
         result = self.dal.delete(sql, params)
 
-        if result is not None:
+        if result != 0:
             return f"Number of rows affected: {result}, vacationID {vacationID} is deleted."
         else:
-            return "No rows updated"
+            return "No rows deleted"
     
     def close(self):
         self.dal.close()

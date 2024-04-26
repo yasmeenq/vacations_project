@@ -52,10 +52,10 @@ users_logic = UsersLogic()
 vacation_logic = VacationsLogic()
 
 #get all vacations 👍
-all_vacations = vacation_logic.get_all_vacations()
-for vacation in all_vacations:
-    print(vacation)
-print()
+# all_vacations = vacation_logic.get_all_vacations()
+# for vacation in all_vacations:
+#     print(vacation)
+# print()
 
 #add new vacation 👍
 # insert_country_id = str(input("insert countryID: "))

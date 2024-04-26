@@ -7,105 +7,102 @@ class VacationsFacade:
     def __init__(self):
         self.logic = VacationsLogic()
 
-    # get all vacations 
-    def get_vacations_sorted_by_date_desc(self):   
+
+    def get_vacations_sorted_by_date_desc(self):
+        print("\nAll vacations: ")   
         vacations = self.logic.get_all_vacations()
         return vacations
 
-    # add new vacation 
-    def add_new_vacation(self,countryID, description, startDate, endDate,price, vacationPictureFile):
+
+    def add_new_vacation(self, countryID, description, startDate, endDate, price, vacationPictureFile):
         
-        #1) all fields connot be empty:
-        while not countryID:
-            print("countryID cannot be empty.")
-            countryID = input("enter countryID: ")
-        
-        while not description:
-            print("description cannot be empty.")
-            description = input("enter description: ")
-        
-        while not startDate:
-            print("startDate cannot be empty.")
-            startDate = input("enter startDate: ")
+        # Input validation - cannot have empty fields
+        if not all([countryID, description, startDate, endDate, price, vacationPictureFile]):
+            return "Fields cannot be empty. Please try again."
 
-        while not endDate:
-            print("endDate cannot be empty.")
-            endDate = input("enter endDate: ")
-
-        while not price:
-            print("price cannot be empty.")
-            price = input("enter price: ")
-
-        while not vacationPictureFile:
-            print("vacationPictureFile cannot be empty.")
-            vacationPictureFile = input("enter vacationPictureFile: ")
-
-
-        #2) price cannot be negative or more than 10,000: 
-        while price < 0:
-            print("price cannot be negative. Please try again.")
-            price = input("enter price: ")
-        while price > 10000:
-            print("price cannot be more than 10,000 Please try again.")
-            price = input("enter price: ")           
-
-        #3) start date cannot be greater than end date:
-
-        # Convert strings to datetime objects
-        start_date = datetime.strptime(startDate, '%Y-%m-%d')
-        end_date = datetime.strptime(endDate, '%Y-%m-%d')
-
-        # Compare dates
-        if start_date <= end_date:
-            return True
-        if start_date > end_date:
-            return f"start date cannot be greater than end date."
-            
-        #4) must be valid dates - not from the past:
-
+        # Validate countryID - must be integer
         try:
-            # Convert string to datetime object
+            countryID = int(countryID)
+        except ValueError:
+            return "CountryID must be an integer."
+        
+        # Validate price - cannot be negative or over 10,000
+        try:
+            price = float(price)
+            if not 0 <= price <= 10000:
+                return "Price must be between 0 and 10,000."
+        except ValueError:
+            return "Price must be a valid number."       
+
+        # Validate dates
+        try:
+            # Convert date string to datetime object
             getStartDate = datetime.strptime(startDate, '%Y-%m-%d')
             getEndDate = datetime.strptime(endDate, '%Y-%m-%d')
+            
+            if getStartDate > getEndDate:
+                return "Start date cannot be greater than end date."
+
             # Get current date
             current_date = datetime.now().date()
-            # Check if date is not in the past
-            if getStartDate.date() >= current_date and getEndDate.date() >= current_date:
-                return True
+
             if getStartDate.date() < current_date or getEndDate.date() < current_date:
-                return False
-        except ValueError as e:
-                return f"Value Error: Invalid Date."
+                return "Invalid Date: Dates cannot be in the past."
+        
+        except ValueError:
+            return "Invalid Date Format. Date must be in YYYY-MM-DD format."
+        
+        # Add Vacation
+        new_vacation = self.logic.insert_new_vacation(countryID, description, startDate, endDate, price, vacationPictureFile)
+        return new_vacation
 
 
-    # new_vacation = vacation_logic.insert_new_vacation(
-    #     insert_country_id, insert_description,
-    #     insert_startDate, insert_endDate,
-    #     insert_price, insert_picture
-    #     )
-    # print(new_vacation)
+    def update_vacation(self, vacationID, countryID, description, startDate, endDate,price, vacationPictureFile):
+        
+        # Input validation - cannot have empty fields except for vacation picture.
+        if not all([vacationID, countryID, description, startDate, endDate, price]):
+            return "All Fields must be filled except for vacation picture. Please try again."
+        
+        # Validate vacationID and countryID - must be integers
+        try:
+            vacationID = int(vacationID)
+            countryID = int(countryID)
+        except ValueError:
+            return "VacationID and CountryID must be integers."
 
+        # Validate price - cannot be negative or over 10,000
+        try:
+            price = float(price)
+            if not 0 <= price <= 10000:
+                return "Price must be between 0 and 10,000."
+        except ValueError:
+            return "Price must be a valid number."    
 
+        # Validate dates
+        try:
+            getStartDate = datetime.strptime(startDate, '%Y-%m-%d')
+            getEndDate = datetime.strptime(endDate, '%Y-%m-%d')
 
+            if getStartDate > getEndDate:
+                return "Start date cannot be greater than end date."
+            
+        except ValueError:
+            return "Invalid Date Format. Date must be in YYYY-MM-DD format."
 
-    # # update an existing vacation 👍
-    # update_vacation_id = str(input("enter vacation ID you want to update: "))
-    # update_country_id = str(input("update countryID: "))
-    # update_description = input("update description: ")
-    # update_startDate = input("update startDate: ")
-    # update_endDate = input("update endDate: ")
-    # update_price = input("update price: ")
-    # update_picture = input("update vacation picture file: ")
-
-    # updated_vacation = vacation_logic.update_existing_vacation(
-    #     update_vacation_id, update_country_id,update_description,
-    #     update_startDate, update_endDate,
-    #     update_price, update_picture
-    #     )
-    # print(updated_vacation)
+        # Update Vacation
+        update_vacation = self.logic.update_existing_vacation(vacationID, countryID, description, startDate, endDate,price, vacationPictureFile)
+        return update_vacation
     
-    # # delete an existing vacation 👍🤩
-    # delete_vacationID = str(input("enter vacation ID you want to delete: "))
-    # delete_vacation = vacation_logic.delete_existing_vacation(delete_vacationID)
-    # print(delete_vacation)
 
+    def delete_vacation(self, vacationID): 
+                
+        try:
+            vacationID = int(vacationID)
+        except ValueError:
+            return "VacationID must be an integer."
+        
+        delete_vacation = self.logic.delete_existing_vacation(vacationID)
+        return delete_vacation
+
+    def close(self):
+        self.logic.close()
