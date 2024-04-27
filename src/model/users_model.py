@@ -1,8 +1,9 @@
 
-#Create Model Class: set columns as attributes- str func - dict to object - dicts to objects  #4
 
 class UsersModel:
-    def __init__(self,userID, firstname,lastname,email,password,roleID):
+    
+    #set columns as attributes
+    def __init__(self, userID, firstname, lastname, email, password, roleID):
         self.userID = userID
         self.firstname = firstname
         self.lastname = lastname
@@ -14,7 +15,7 @@ class UsersModel:
         return f"userID: {self.userID}, firstname: {self.firstname}, lastname: {self.lastname}, email: {self.email}, password: {self.password}, roleID: {self.roleID}"
     
     @staticmethod
-    def dictionary_to_object(dictionary):
+    def dictionary_to_object(dictionary) -> 'UsersModel':
         userID = dictionary["userID"]
         firstname = dictionary["firstname"]
         lastname = dictionary["lastname"]
@@ -25,7 +26,7 @@ class UsersModel:
         return user
     
     @staticmethod
-    def dictionaries_to_objects(list_of_dictionaries):
+    def dictionaries_to_objects(list_of_dictionaries) -> list:
         items = []
         for dictionary in list_of_dictionaries:
             dictionary = UsersModel.dictionary_to_object(dictionary)

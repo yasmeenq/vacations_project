@@ -1,6 +1,8 @@
 import mysql.connector
-#create DAL Class: start connection - get table - get one - insert - update - delete - close connection - #7
+
 class DAL:
+
+    # Constructor - start connection
     def __init__(self):
         self.connection = mysql.connector.connect(
             host="localhost",
@@ -9,30 +11,29 @@ class DAL:
             database="vacation"
         )
     
-    #👍
-    def get_table(self, sql, params=None):
+    # Get table from DB 👍 
+    def get_table(self, sql, params=None) -> dict:
         with self.connection.cursor(dictionary=True) as cursor:
             cursor.execute(sql, params)
             table = cursor.fetchall()
             return table
 
-    #👍
-    def get_one_row(self, sql, params=None):
+    # Get one row from DB 👍
+    def get_scalar(self, sql, params=None) -> dict:
         with self.connection.cursor(dictionary=True) as cursor:
             cursor.execute(sql, params)
-            row = cursor.fetchone()  # Fetch the first row
-            cursor.fetchall()  # Fetch all remaining rows (if any), but don't store them
-            return row  # Return the fetched row
+            row = cursor.fetchone() 
+            return row  
 
-    #👍
+    # Insert a row to DB 👍
     def insert(self, sql, params=None):
         with self.connection.cursor() as cursor:
             cursor.execute(sql, params)
-            self.connection.commit()
+            self.connection.commit()  #save to database now
             last_row_id = cursor.lastrowid
             return last_row_id
     
-    #👍
+    # Update a row from DB 👍
     def update(self, sql, params=None):
         with self.connection.cursor() as cursor:
             cursor.execute(sql, params)
@@ -40,7 +41,7 @@ class DAL:
             row_count = cursor.rowcount
             return row_count  
 
-    #👍
+    # Delete a row from DB 👍
     def delete(self, sql, params=None):
         with self.connection.cursor() as cursor:
             cursor.execute(sql, params)
@@ -48,5 +49,6 @@ class DAL:
             row_count = cursor.rowcount
             return row_count  
 
+    # Close connection
     def close(self):
         self.connection.close()

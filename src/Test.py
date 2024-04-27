@@ -9,11 +9,12 @@ class Test:
         self.likesFacade = LikesFacade()
 
     def test_all(self):
+        
         def users():
             print("【Ｕｓｅｒｓ　Ｔｅｓｔ：】")
             # 1) add new user:
             print("\nRegister New User:")
-            new_user = self.usersFacade.user_registration("Mia", "Patel", "mia1@mail.com",7771)
+            new_user = self.usersFacade.user_registration("Sarah", "Brown ", "sarah@mail.com",7771)
             print(new_user)
 
             print("\nExceptions:")
@@ -73,8 +74,7 @@ class Test:
             print("【Ｖａｃａｔｉｏｎｓ　Ｔｅｓｔ：】")
             #1) get vacations 👍
             vacation = self.vacationsFacade.get_vacations_sorted_by_date_desc()  #returns a list
-            for item in vacation:
-                print(item)
+            print(vacation)
 
             print()
             print()
@@ -136,8 +136,11 @@ class Test:
 
             print()
             print()
-            print("Deleting Vacation:")
+            
+
             #4) delete vacation 👍
+            print("Deleting Vacation:")
+
             delete_vacation = self.vacationsFacade.delete_vacation(25)
             print(delete_vacation)
             
