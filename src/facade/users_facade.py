@@ -13,7 +13,7 @@ class UsersFacade:
     def validate_email(email):
         # Regular expression pattern for validating email addresses
         pattern = r'^[\w\.-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$'
-        return re.match(pattern, email)
+        return re.match(pattern, email.strip())
 
     @staticmethod
     def validate_password(password):
@@ -31,7 +31,7 @@ class UsersFacade:
             raise ValueError("First name and last name must be strings.")
 
         # Check if firstName and lastName contain only letters
-        if not (firstName.isalpha() and lastName.isalpha()):
+        if not (firstName.strip().isalpha() and lastName.strip().isalpha()):
             raise ValueError("First name and last name must contain only letters.")
 
         # Validate email format

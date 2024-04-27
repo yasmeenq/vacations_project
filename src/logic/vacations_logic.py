@@ -13,7 +13,7 @@ class VacationsLogic:
         """
         result = self.dal.get_table(sql)
         result_to_object = VacationsModel.dictionaries_to_objects(result)
-        print("Vacations sorted by start date in descending order:")
+        print("\nVacations sorted by start date in descending order:\n")
         return result_to_object
     
 
