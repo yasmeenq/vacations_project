@@ -203,7 +203,8 @@ class TestExceptions:
             try:
                 #exception - invalid userID or vacationID
                 like_vacation = self.likesFacade.like(15,"stam")
-                print(like_vacation)
+                print(like_vacation)  #userID and vacationID must be integers.
+                
             except ValueError as err:
                 print(f"ValueError: {err}")
         
