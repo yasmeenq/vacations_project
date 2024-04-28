@@ -98,7 +98,12 @@ class VacationsFacade:
         # Validate vacationID - must be int
         if not isinstance(vacationID, int):
             raise ValueError("VacationID must be an integer.")     
-        
+
+        # Does Vacation exist to delete it?
+        does_vacation_exist = self.logic.get_one_vacation(vacationID)
+        if not does_vacation_exist:
+            raise ValueError("Vacation doesn't exist. try again.")
+       
         # Delete Vacation
         delete_vacation = self.logic.delete_existing_vacation(vacationID)
         return delete_vacation

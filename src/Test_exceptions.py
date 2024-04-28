@@ -177,7 +177,7 @@ class TestExceptions:
             try:
                 # exception5 - nonexistent vacationID 
                 update_vacation5 = self.vacationsFacade.update_vacation(87654, 3, "manhattan","2025-01-03", "2025-01-05", 2200, "manhattan.png")
-                print(update_vacation5)  #No rows updated
+                print(update_vacation5)  #ValueError: Vacation doesn't exist. try again.
             except ValueError as e:
                 print(f"ValueError: {e}")
         
@@ -196,20 +196,37 @@ class TestExceptions:
             try:
                 #exception2 - nonexistent vacationID 
                 delete_vacation2 = self.vacationsFacade.delete_vacation(9876543)
-                print(delete_vacation2)  #No rows deleted
+                print(delete_vacation2)  #ValueError: Vacation doesn't exist. try again.
             except ValueError as e:
                 print(f"ValueError: {e}")
+
 
         def likes():
             print("【Ｌｉｋｅｓ　ｅｘｃｅｐｔｉｏｎｓ】\n")
             try:
-                #exception - invalid userID or vacationID
-                like_vacation = self.likesFacade.like(15,"stam")
-                print(like_vacation)  #userID and vacationID must be integers.
-                
+                #exception1 - invalid userID or vacationID
+                like_vacation1 = self.likesFacade.like(15,"stam")
+                print(like_vacation1)  #userID and vacationID must be integers.
             except ValueError as err:
                 print(f"ValueError: {err}")
         
+            try:
+                #exception2 - userID doesn't exist
+                like_vacation2 = self.likesFacade.like(99999,2)
+                print(like_vacation2) #User Doesn't Exist. Please try again.
+            except ValueError as e:
+                print(f"ValueError: {e}")
+
+            try:
+                #exception3 - vacationID doesn't exist
+                like_vacation3 = self.likesFacade.like(1,99999)
+                print(like_vacation3) #Vacation Doesn't Exist. Please try again.
+            except ValueError as e:
+                print(f"ValueError: {e}")                
+
+
+
+
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
         users()
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")

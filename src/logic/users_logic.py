@@ -10,9 +10,12 @@ class UsersLogic:
     def get_all_users(self) -> list:
         sql = "SELECT * FROM vacation.users"
         result = self.dal.get_table(sql)
-        result_to_obj = UsersModel.dictionaries_to_objects(result)
-        return result_to_obj
-   
+        if result is not None:
+            result_to_obj = UsersModel.dictionaries_to_objects(result)
+            return result_to_obj
+        else:
+            return "Import Failed. Try again."
+        
    #👍 show one user
     def get_one_user(self, userID):
         sql = "SELECT * FROM vacation.users WHERE userID = %s"
@@ -43,7 +46,7 @@ class UsersLogic:
             return "No rows inserted"
 
     #👍 get user by email and password
-    def get_user_by_email_password(self, email, password) -> "UsersModel":
+    def get_user_by_email_password(self, email, password) -> list:
         sql = """
         SELECT * FROM vacation.users 
         WHERE email = %s AND password= %s
