@@ -162,14 +162,14 @@ class TestExceptions:
             
             try:
                 #exception3 - invalid price
-                update_vacation3 = self.vacationsFacade.update_vacation(16, 3, "manhattan","2025-01-03", "2025-01-05", 9999999, "manhattan.png")
+                update_vacation3 = self.vacationsFacade.update_vacation(12, 3, "manhattan","2025-01-03", "2025-01-05", 9999999, "manhattan.png")
                 print(update_vacation3)  #Price must be between 0 and 10,000.
             except ValueError as e:
                 print(f"ValueError: {e}")
 
             try:
                 #exception4 - invalid dates
-                update_vacation4 = self.vacationsFacade.update_vacation(16, 3, "manhattan","2025-01-17", "2025-01-05", 2200, "manhattan.png")
+                update_vacation4 = self.vacationsFacade.update_vacation(12, 3, "manhattan","2025-01-17", "2025-01-05", 2200, "manhattan.png")
                 print(update_vacation4) #Start date cannot be greater than end date.
             except ValueError as e:
                 print(f"ValueError: {e}")

@@ -16,7 +16,7 @@ class Test:
             # 1) add new user: 👍
             try:
                 print("\nRegister New User:")
-                new_user = self.usersFacade.user_registration("Blake", "Lively", "blake@mail.com","qwerty123")
+                new_user = self.usersFacade.user_registration("issac", "scott", "isacc@mail.com","pass123")
                 print(new_user)
             except ValueError as err:
                 print(f"ValueError: {err}")
@@ -49,7 +49,7 @@ class Test:
             #2) add new vacation 👍
             print("Adding New Vacation:")
             try:
-                new_vacation = self.vacationsFacade.add_new_vacation (3,"explore LA", "2025-07-03", "2025-07-20", 2400, "LA.png")
+                new_vacation = self.vacationsFacade.add_new_vacation (3,"explore NYC", "2025-07-03", "2025-07-20", 2400, "nyc.png")
                 print(new_vacation)
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -61,7 +61,7 @@ class Test:
             #3) update vacation 👍
             print("Updating Vacation:")
             try:
-                update_vacation = self.vacationsFacade.update_vacation(26, 3, "explore manhattan","2025-01-03", "2025-01-05", 2200, "manhattan.png")
+                update_vacation = self.vacationsFacade.update_vacation(44, 3, "explore manhattan","2025-01-03", "2025-01-05", 2750, "manhattan.png")
                 print(update_vacation)
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -73,7 +73,7 @@ class Test:
             #4) delete vacation 👍
             print("Deleting Vacation:")
             try:
-                delete_vacation = self.vacationsFacade.delete_vacation(26)
+                delete_vacation = self.vacationsFacade.delete_vacation(46)
                 print(delete_vacation)
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -85,7 +85,7 @@ class Test:
             print("【Ｌｉｋｅｓ　Ｔｅｓｔ：】 \n")
             # add like 👍
             try:
-                like_vacation = self.likesFacade.like(1,9999)
+                like_vacation = self.likesFacade.like(6,8)
                 print(like_vacation)
                 print()
             except ValueError as e:
