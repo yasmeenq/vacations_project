@@ -84,13 +84,23 @@ class Test:
         def likes():
             print("【Ｌｉｋｅｓ　Ｔｅｓｔ：】 \n")
             # add like 👍
-            like_vacation = self.likesFacade.like(15,11)
-            print(like_vacation)
-            print()
+            try:
+                like_vacation = self.likesFacade.like(15,11)
+                print(like_vacation)
+                print()
+            except ValueError as e:
+                print(f"ValueError: {e}")
+            except Exception as err:
+                print(f"General Error: {err}")
 
             # delete like 👍
-            unlike_vacation = self.likesFacade.unlike(15,11)
-            print(unlike_vacation)
+            try:
+                unlike_vacation = self.likesFacade.unlike(15,11)
+                print(unlike_vacation)
+            except ValueError as e:
+                print(f"ValueError: {e}")
+            except Exception as err:
+                print(f"General Error: {err}")                
 
 
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
