@@ -8,12 +8,6 @@ class VacationsFacade:
     def __init__(self):
         self.logic = VacationsLogic()
 
-    #👍
-    def get_vacations_sorted_by_date_desc(self):
-        vacations = self.logic.get_all_vacations()
-        for item in vacations:
-            print(item)
-
     @staticmethod 
     def validate_price(price):
         return 0 <= float(price) <= 10000
@@ -31,6 +25,13 @@ class VacationsFacade:
         
         except ValueError as e:
             raise ValueError("Invalid Date Format. Date must be in YYYY-MM-DD format.")
+
+    
+    #👍
+    def get_vacations_sorted_by_date_desc(self):
+        vacations = self.logic.get_all_vacations()
+        for item in vacations:
+            print(item)
 
 
     #👍
@@ -62,6 +63,7 @@ class VacationsFacade:
         new_vacation = self.logic.insert_new_vacation(countryID, description, startDate, endDate, price, vacationPictureFile)
         return new_vacation
 
+
     #👍
     def update_vacation(self, vacationID, countryID, description, startDate, endDate,price, vacationPictureFile):
         
@@ -89,7 +91,8 @@ class VacationsFacade:
         update_vacation = self.logic.update_existing_vacation(vacationID, countryID, description, startDate, endDate,price, vacationPictureFile)
         return update_vacation
     
-
+    
+    #👍
     def delete_vacation(self, vacationID): 
 
         # Validate vacationID - must be int
@@ -99,6 +102,7 @@ class VacationsFacade:
         # Delete Vacation
         delete_vacation = self.logic.delete_existing_vacation(vacationID)
         return delete_vacation
+
 
     def close(self):
         self.logic.close()

@@ -5,7 +5,7 @@ class LikesLogic:
     def __init__(self):
         self.dal = DAL()
  
-    # 👍
+    #👍 user like a vacation
     def add_like(self, userID, vacationID):
         #check if like already exists:
         check_sql = """
@@ -32,7 +32,7 @@ class LikesLogic:
         else:
             return "User already liked this vacation."
 
-    #👍
+    #👍 user unlike vacation
     def delete_like(self, userID, vacationID):
         sql = """
         DELETE FROM vacation.likes

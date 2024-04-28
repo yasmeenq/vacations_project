@@ -50,7 +50,6 @@ class UsersFacade:
         new_user = self.logic.add_regular_user(firstName, lastName, email, password)
         return f"{new_user} \nRegistered successfully! Welcome {firstName}!😊"
        
-
    
     #👍
     def user_login(self, email, password):

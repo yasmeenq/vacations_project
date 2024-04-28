@@ -4,7 +4,8 @@ from logic.likes_logic import *
 class LikesFacade:
     def __init__(self) -> None:
         self.logic = LikesLogic()
-
+    
+    #👍
     def like(self, userID, vacationID):
 
         if not isinstance(userID,int) or not isinstance(vacationID, int):
@@ -14,6 +15,7 @@ class LikesFacade:
         like_vacation = self.logic.add_like(userID, vacationID)
         return like_vacation
 
+    #👍
     def unlike(self, userID, vacationID):
 
         if not isinstance(userID,int) or not isinstance(vacationID, int):
