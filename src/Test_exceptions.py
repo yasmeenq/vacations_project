@@ -12,6 +12,7 @@ class TestExceptions:
         
         def users(): 
             print("【Ｕｓｅｒｓ　Ｔｅｓｔ：】\n")
+
             print("【ａｄｄ　ｕｓｅｒ　ｅｘｃｅｐｔｉｏｎｓ】\n")
 
             try:
@@ -97,6 +98,7 @@ class TestExceptions:
         
         def vacations():
             print("【Ｖａｃａｔｉｏｎｓ　Ｔｅｓｔ：】\n")
+            
             print("【ａｄｄ　ｎｅｗ　ｖａｃａｔｉｏｎ　ｅｘｃｅｐｔｉｏｎｓ】\n")
 
             try:      
