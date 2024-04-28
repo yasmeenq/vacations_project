@@ -16,7 +16,7 @@ class Test:
             # 1) add new user: 👍
             try:
                 print("\nRegister New User:")
-                new_user = self.usersFacade.user_registration("Sarah", "Brown", "sarah@mail.com",7771)
+                new_user = self.usersFacade.user_registration("Blake", "Lively", "blake@mail.com","qwerty123")
                 print(new_user)
             except ValueError as err:
                 print(f"ValueError: {err}")
