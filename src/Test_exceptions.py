@@ -5,8 +5,8 @@ from facade.likes_facade import *
 class TestExceptions:
     def __init__(self):
         self.usersFacade = UsersFacade()
-        self.vacationsFacade = VacationsFacade()
-        self.likesFacade = LikesFacade()
+        self.vacationsFacade = VacationsFacade(self.usersFacade)
+        self.likesFacade = LikesFacade(self.usersFacade)
 
     def test_all_exceptions(self):
         
@@ -103,6 +103,7 @@ class TestExceptions:
 
             try:      
                 #exceptions1 empty fields:
+                user_login = self.usersFacade.user_login("john@mail.com","1234")
                 new_vacation1 = self.vacationsFacade.add_new_vacation(3, "", "2025-01-03", "2025-01-07", 2400, "")
                 print(new_vacation1)  #Fields cannot be empty. Please try again.
             except ValueError as e:
@@ -136,7 +137,7 @@ class TestExceptions:
                 print(f"ValueError: {e}")
 
             try:                
-                new_vacation6 = self.vacationsFacade.add_new_vacation(3, "explore NYC", "string", "01.02.2024", 2400, "nyc.png")
+                new_vacation6 = self.vacationsFacade.add_new_vacation(3, "explore NYC", "2024-01-28", "01.02.2024", 2400, "nyc.png")
                 print(new_vacation6)  #Invalid Date Format. Date must be in YYYY-MM-DD format.
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -204,6 +205,7 @@ class TestExceptions:
         def likes():
             print("【Ｌｉｋｅｓ　ｅｘｃｅｐｔｉｏｎｓ】\n")
             try:
+                user_login = self.usersFacade.user_login("taylor@mail.com","a1b2c3")
                 #exception1 - invalid userID or vacationID
                 like_vacation1 = self.likesFacade.like(15,"stam")
                 print(like_vacation1)  #userID and vacationID must be integers.
@@ -225,8 +227,6 @@ class TestExceptions:
                 print(f"ValueError: {e}")                
 
 
-
-
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
         users()
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
@@ -234,6 +234,7 @@ class TestExceptions:
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
         likes()
         print("\n───────*.｡:｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱✱*.｡:｡✱*.:｡✧*.｡✰*.:｡✧*.｡:｡*.｡✱*.｡:｡✱───────\n")
+    
     
     def close(self):
         self.usersFacade.close()

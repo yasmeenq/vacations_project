@@ -2,11 +2,17 @@ from utils.dal import *
 from logic.likes_logic import *
 
 class LikesFacade:
-    def __init__(self) -> None:
+    def __init__(self, user_facade):
         self.logic = LikesLogic()
+        self.user_facade = user_facade
     
     #👍
     def like(self, userID, vacationID):
+
+        # RoleID Validation - only Users can add likes
+        user_role = int(self.user_facade.get_current_role())
+        if user_role != 2:
+            raise ValueError("Only Users can add likes.")
 
         #check if userID and vacation ID are integers
         if not isinstance(userID,int) or not isinstance(vacationID, int):
@@ -26,6 +32,11 @@ class LikesFacade:
 
     #👍
     def unlike(self, userID, vacationID):
+
+        # RoleID Validation - only Users can delete likes
+        user_role = int(self.user_facade.get_current_role())
+        if user_role != 2:
+            raise ValueError("Only Users can delete likes.")
 
         #check if userID and vacation ID are integers
         if not isinstance(userID,int) or not isinstance(vacationID, int):

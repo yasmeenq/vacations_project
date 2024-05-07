@@ -7,7 +7,9 @@ import re
 class UsersFacade: 
     
     def __init__(self):
-        self.logic= UsersLogic()  
+        self.logic= UsersLogic()
+        self.dal = DAL()
+        self.current_role = None
 
     @staticmethod
     def validate_email(email):
@@ -71,8 +73,10 @@ class UsersFacade:
 
             if check_user == "User Doesn't Exist.":
                 return "Incorrect Email or Password. Please try again."
-            elif isinstance(check_user, list) and len(check_user) > 0:
-                return f"Logged in successfully!\n{check_user[0]}"
+            
+            elif isinstance(check_user, dict) and len(check_user) > 0:
+                self.current_role = check_user["roleID"]
+                return f"Logged in successfully!\n{check_user}"
             
             else:
                 return "User Doesn't Exist. Please try again later."
@@ -81,6 +85,13 @@ class UsersFacade:
             return f"An unexpected error occurred: {str(e)}. Please try again later."        
                 
     
+    def get_current_role(self):
+        if self.current_role is not None:
+            return self.current_role
+        else:
+            raise ValueError("Login Failed.")
+
+
     def close(self):
         self.logic.close()    
 

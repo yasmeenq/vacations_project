@@ -5,8 +5,8 @@ from facade.likes_facade import *
 class Test:
     def __init__(self):
         self.usersFacade = UsersFacade()
-        self.vacationsFacade = VacationsFacade()
-        self.likesFacade = LikesFacade()
+        self.vacationsFacade = VacationsFacade(self.usersFacade)
+        self.likesFacade = LikesFacade(self.usersFacade)
 
     def test_all(self):
         
@@ -27,7 +27,7 @@ class Test:
 
             #2) user login: 👍
             try:
-                user_login = self.usersFacade.user_login("john@mail.com",1234)
+                user_login = self.usersFacade.user_login("john@mail.com","1234") #Admin
                 print(user_login)
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -38,7 +38,7 @@ class Test:
         def vacations():
             print("【Ｖａｃａｔｉｏｎｓ　Ｔｅｓｔ：】")
 
-            #1) get vacations 👍
+            # 1) get vacations 👍
             try:
                 vacation = self.vacationsFacade.get_vacations_sorted_by_date_desc() 
             except Exception as err:
@@ -61,7 +61,7 @@ class Test:
             #3) update vacation 👍
             print("Updating Vacation:")
             try:
-                update_vacation = self.vacationsFacade.update_vacation(44, 3, "explore manhattan","2025-01-03", "2025-01-05", 2750, "manhattan.png")
+                update_vacation = self.vacationsFacade.update_vacation(44, 3, "explore Manhattan","2025-01-03", "2025-01-11", 2750, "manhattan.png")
                 print(update_vacation)
             except ValueError as e:
                 print(f"ValueError: {e}")
@@ -73,7 +73,7 @@ class Test:
             #4) delete vacation 👍
             print("Deleting Vacation:")
             try:
-                delete_vacation = self.vacationsFacade.delete_vacation(46)
+                delete_vacation = self.vacationsFacade.delete_vacation(49)
                 print(delete_vacation)
             except ValueError as e:
                 print(f"ValueError: {e}")

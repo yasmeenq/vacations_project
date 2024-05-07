@@ -1,12 +1,14 @@
 from utils.dal import *
 from model.vacations_model import *
 from logic.vacations_logic import *
+from facade.users_facade import *
 from datetime import datetime
 
 class VacationsFacade:
     
-    def __init__(self):
+    def __init__(self, user_facade):
         self.logic = VacationsLogic()
+        self.user_facade = user_facade 
 
     @staticmethod 
     def validate_price(price):
@@ -37,6 +39,11 @@ class VacationsFacade:
     #👍
     def add_new_vacation(self, countryID, description, startDate, endDate, price, vacationPictureFile):
         
+        # RoleID Validation - only Admin can add vacations
+        user_role = int(self.user_facade.get_current_role())
+        if user_role != 1:
+            raise ValueError("Only Admins can add new vacations")
+
         # Input validation - cannot have empty fields
         if not all([countryID, description, startDate, endDate, price, vacationPictureFile]):
             raise ValueError("Fields cannot be empty. Please try again.")
@@ -66,7 +73,12 @@ class VacationsFacade:
 
     #👍
     def update_vacation(self, vacationID, countryID, description, startDate, endDate,price, vacationPictureFile):
-        
+
+        # RoleID Validation - only Admin can update vacations
+        user_role = int(self.user_facade.get_current_role())
+        if user_role != 1:
+            raise ValueError("Only Admins can add update vacations")
+
         # Input validation - cannot have empty fields except for vacation picture.
         if not all([vacationID, countryID, description, startDate, endDate, price]):
             raise ValueError("All Fields must be filled except for vacation picture. Please try again.")
@@ -94,6 +106,12 @@ class VacationsFacade:
     
     #👍
     def delete_vacation(self, vacationID): 
+
+        # RoleID Validation - only Admin can delete vacations
+        user_role = int(self.user_facade.get_current_role())
+        if user_role != 1:
+            raise ValueError("Only Admins can delete new vacations")
+
 
         # Validate vacationID - must be int
         if not isinstance(vacationID, int):

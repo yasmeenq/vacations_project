@@ -46,7 +46,7 @@ class UsersLogic:
             return "No rows inserted"
 
     #👍 get user by email and password
-    def get_user_by_email_password(self, email, password) -> list:
+    def get_user_by_email_password(self, email, password) -> dict:
         sql = """
         SELECT * FROM vacation.users 
         WHERE email = %s AND password= %s
@@ -56,8 +56,7 @@ class UsersLogic:
         if not result:  # Check if the result set is empty
             return "User Doesn't Exist."
         else:
-            result_to_obj = UsersModel.dictionaries_to_objects(result)
-            return result_to_obj 
+            return result[0]
 
     #👍 check if an email exists
     def if_email_exist(self,email):
