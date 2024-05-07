@@ -32,7 +32,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`userID`),
   KEY `roleID_idx` (`roleID`),
   CONSTRAINT `roleID` FOREIGN KEY (`roleID`) REFERENCES `roles` (`roleID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John','Smith','john@mail.com','1234',1),(2,'Emily','Brown','emily@mail.com','abcd',2),(6,'Taylor','Swift','taylor@mail.com','a1b2c3',2),(15,'Mia','Patel','mia@mail.com','7771',2),(18,'Adam','Lee','lee@mail.com','8888',2),(24,'Sarah','Brown','sarah@mail.com','qwerty123',2),(27,'Blake','Lively','blake@mail.com','qwerty123',2);
+INSERT INTO `users` VALUES (1,'John','Smith','john@mail.com','1234',1),(2,'Emily','Brown','emily@mail.com','abcd',1),(6,'Taylor','Swift','taylor@mail.com','a1b2c3',2),(15,'Mia','Patel','mia@mail.com','7771',2),(18,'Adam','Lee','lee@mail.com','8888',2),(24,'Sarah','Brown','sarah@mail.com','qwerty123',2),(27,'Blake','Lively','blake@mail.com','qwerty123',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-28 21:59:29
+-- Dump completed on 2024-05-07 23:26:12
